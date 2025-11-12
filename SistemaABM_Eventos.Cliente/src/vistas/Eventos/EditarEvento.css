@@ -1,0 +1,78 @@
+:root {
+  --bg-900: #111827;
+  --bg-800: #1f2937;
+  --bg-700: #374151;
+  --text: #ffffff;
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --radius: 12px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  --t: 0.18s ease;
+}
+
+/* ===== Page ===== */
+.ee-page {
+  min-height: 100vh;
+  background: var(--bg-900);
+  color: var(--text);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* ===== Title ===== */
+.ee-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  margin: 0 0 1.5rem;
+}
+
+/* ===== Form Card ===== */
+.ee-card {
+  background: var(--bg-800);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ===== Inputs ===== */
+.ee-input,
+.ee-textarea,
+.ee-select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--bg-700);
+  color: var(--text);
+  outline: none;
+  transition: box-shadow var(--t), transform var(--t);
+}
+
+.ee-input:focus,
+.ee-textarea:focus,
+.ee-select:focus {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ===== Button ===== */
+.ee-btn {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  background: var(--accent);
+  color: #062b12;
+  transition: background var(--t), transform var(--t), box-shadow var(--t);
+}
+
+.ee-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+}

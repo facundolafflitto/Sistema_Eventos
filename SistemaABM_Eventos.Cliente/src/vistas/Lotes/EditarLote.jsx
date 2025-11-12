@@ -1,81 +1,97 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./EditarLote.css"; 
 
 export default function EditarLote() {
   const { id } = useParams();
+
   const [form, setForm] = useState({
     nombre: "",
     precio: "",
-    cantidad: "",
+    cupo: "",
     eventoId: "",
   });
+
   const [eventos, setEventos] = useState([]);
 
+  // Cargar datos del lote y lista de eventos
   useEffect(() => {
     fetch(`http://localhost:5281/api/lotes/${id}`)
       .then((res) => res.json())
-      .then((data) => setForm(data))
-      .catch((err) => console.error(err));
+      .then(setForm)
+      .catch((err) => console.error("Error al cargar lote:", err));
 
     fetch("http://localhost:5281/api/eventos")
       .then((res) => res.json())
-      .then((data) => setEventos(data))
-      .catch((err) => console.error(err));
+      .then(setEventos)
+      .catch((err) => console.error("Error al cargar eventos:", err));
   }, [id]);
 
+  // Manejo de cambios
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch(`http://localhost:5281/api/lotes/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     })
       .then((res) => {
-        if (res.ok) alert("Lote editado con éxito");
+        if (res.ok) {
+          alert("✅ Lote editado con éxito");
+        } else {
+          alert("❌ Error al editar el lote");
+        }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error al guardar:", err));
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-3xl font-bold mb-6">✏️ Editar lote</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg mx-auto"
-      >
+    <div className="el-page">
+      <h1 className="el-title">✏️ Editar lote</h1>
+
+      <form className="el-card" onSubmit={handleSubmit}>
         <input
           type="text"
           name="nombre"
           placeholder="Nombre del lote"
           value={form.nombre}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="el-input"
+          required
         />
+
         <input
           type="number"
           name="precio"
           placeholder="Precio"
           value={form.precio}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="el-input"
+          required
         />
+
         <input
           type="number"
-          name="cantidad"
-          placeholder="Cantidad"
-          value={form.cantidad}
+          name="cupo"
+          placeholder="Cupo"
+          value={form.cupo}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="el-input"
+          required
         />
+
         <select
           name="eventoId"
           value={form.eventoId}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="el-select"
+          required
         >
           <option value="">Seleccionar evento</option>
           {eventos.map((e) => (
@@ -84,10 +100,8 @@ export default function EditarLote() {
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg w-full"
-        >
+
+        <button type="submit" className="el-btn">
           Guardar cambios
         </button>
       </form>

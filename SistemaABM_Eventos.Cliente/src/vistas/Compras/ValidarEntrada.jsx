@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ValidarEntrada.css";
 
 export default function ValidarEntrada() {
   const [codigo, setCodigo] = useState("");
@@ -22,32 +23,24 @@ export default function ValidarEntrada() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6">✅ Validar Entrada</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md"
-      >
+    <div className="ve-page">
+      <h1 className="ve-title">✅ Validar Entrada</h1>
+
+      <form onSubmit={handleSubmit} className="ve-form">
         <input
           type="text"
           placeholder="Código de entrada"
           value={codigo}
           onChange={(e) => setCodigo(e.target.value)}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ve-input"
         />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg w-full"
-        >
+        <button type="submit" className="ve-btn">
           Validar
         </button>
       </form>
+
       {resultado && (
-        <p
-          className={`mt-4 font-semibold ${
-            resultado.success ? "text-green-400" : "text-red-400"
-          }`}
-        >
+        <p className={`ve-result ${resultado.success ? "ok" : "err"}`}>
           {resultado.mensaje}
         </p>
       )}

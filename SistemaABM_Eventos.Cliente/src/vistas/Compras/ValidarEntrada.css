@@ -1,0 +1,82 @@
+:root{
+  --bg-900:#111827;
+  --bg-800:#1f2937;
+  --bg-700:#374151;
+  --text:#ffffff;
+  --ok:#34d399;     /* green-400 */
+  --error:#f87171;  /* red-400 */
+  --btn:#3b82f6;    /* blue-500 */
+  --btn-hover:#2563eb;/* blue-600 */
+  --radius:12px;
+  --shadow:0 10px 25px rgba(0,0,0,.35);
+  --transition:.18s ease;
+}
+
+.ve-page{
+  min-height:100vh;
+  background:var(--bg-900);
+  color:var(--text);
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-sizing:border-box;
+}
+
+.ve-title{
+  font-size:1.875rem; /* ~text-3xl */
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+
+.ve-form{
+  background:var(--bg-800);
+  padding:1.5rem;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  width:100%;
+  max-width:28rem; /* ~max-w-md */
+}
+
+.ve-input{
+  width:100%;
+  padding:.75rem;
+  margin:0 0 1rem;
+  border:none;
+  border-radius:10px;
+  background:var(--bg-700);
+  color:var(--text);
+  outline:none;
+  transition:box-shadow var(--transition), transform var(--transition);
+}
+
+.ve-input:focus{
+  box-shadow:0 0 0 3px rgba(59,130,246,.35);
+  transform:translateY(-1px);
+}
+
+.ve-btn{
+  width:100%;
+  padding:.65rem 1rem;
+  border:none;
+  border-radius:10px;
+  background:var(--btn);
+  color:#eaf2ff;
+  font-weight:700;
+  cursor:pointer;
+  transition:background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.ve-btn:hover{
+  background:var(--btn-hover);
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(37,99,235,.35);
+}
+
+.ve-result{
+  margin-top:1rem;
+  font-weight:700;
+}
+
+.ve-result.ok{ color:var(--ok); }
+.ve-result.err{ color:var(--error); }

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
+import "./CrearLote.css"; 
 
 export default function CrearLote() {
   const [form, setForm] = useState({
     nombre: "",
     precio: "",
-    cantidad: "",
+    cupo: "",
     eventoId: "",
   });
+
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5281/api/eventos")
       .then((res) => res.json())
-      .then((data) => setEventos(data))
-      .catch((err) => console.error(err));
+      .then(setEventos)
+      .catch((err) => console.error("Error al cargar eventos:", err));
   }, []);
 
   const handleChange = (e) => {
@@ -22,53 +24,64 @@ export default function CrearLote() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch("http://localhost:5281/api/lotes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     })
       .then((res) => {
-        if (res.ok) alert("Lote creado con éxito");
+        if (res.ok) {
+          alert("✅ Lote creado con éxito");
+          setForm({ nombre: "", precio: "", cupo: "", eventoId: "" });
+        } else {
+          alert("❌ Error al crear el lote");
+        }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error al crear lote:", err));
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-3xl font-bold mb-6">➕ Crear nuevo lote</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg mx-auto"
-      >
+    <div className="cl-page">
+      <h1 className="cl-title">➕ Crear nuevo lote</h1>
+
+      <form className="cl-card" onSubmit={handleSubmit}>
         <input
           type="text"
           name="nombre"
           placeholder="Nombre del lote"
           value={form.nombre}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="cl-input"
+          required
         />
+
         <input
           type="number"
           name="precio"
           placeholder="Precio"
           value={form.precio}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="cl-input"
+          required
         />
+
         <input
           type="number"
-          name="cantidad"
-          placeholder="Cantidad"
-          value={form.cantidad}
+          name="cupo"
+          placeholder="Cupo"
+          value={form.cupo}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="cl-input"
+          required
         />
+
         <select
           name="eventoId"
           value={form.eventoId}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="cl-select"
+          required
         >
           <option value="">Seleccionar evento</option>
           {eventos.map((e) => (
@@ -77,10 +90,8 @@ export default function CrearLote() {
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg w-full"
-        >
+
+        <button type="submit" className="cl-btn">
           Crear lote
         </button>
       </form>

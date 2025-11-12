@@ -1,0 +1,59 @@
+:root {
+  --bg-900: #111827;
+  --bg-800: #1f2937;
+  --text: #ffffff;
+  --muted: #c6cdd8;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Page ===== */
+.vv-page {
+  min-height: 100vh;
+  background: var(--bg-900);
+  color: var(--text);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* ===== Back link ===== */
+.vv-back {
+  color: #93c5fd;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.vv-back:hover {
+  text-decoration: underline;
+}
+
+/* ===== Title ===== */
+.vv-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  margin: 0.25rem 0 1rem;
+}
+
+/* ===== Text ===== */
+.vv-text {
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+}
+
+/* ===== Image ===== */
+.vv-img {
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 56rem;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Loading ===== */
+.vv-loading {
+  color: #ffffff;
+  padding: 1.5rem;
+}

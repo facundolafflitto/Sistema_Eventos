@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./ComprarEntradas.css";
 
 export default function ComprarEntradas() {
   const [eventos, setEventos] = useState([]);
@@ -10,16 +11,9 @@ export default function ComprarEntradas() {
     email: "",
     direccionEnvio: "",
     metodoPago: "Simulado",
-    items: [
-      {
-        eventoId: "",
-        loteId: "",
-        cantidad: 1,
-      },
-    ],
+    items: [{ eventoId: "", loteId: "", cantidad: 1 }],
   });
 
-  // Traer todos los eventos
   useEffect(() => {
     fetch("http://localhost:5281/api/eventos")
       .then((res) => res.json())
@@ -27,11 +21,8 @@ export default function ComprarEntradas() {
       .catch((err) => console.error("Error al cargar eventos:", err));
   }, []);
 
-  // Cuando selecciono un evento, traigo los lotes de ese evento
   const handleEventoChange = async (e) => {
     const eventoId = e.target.value;
-
-    // Actualizo el estado de compra de forma segura
     setCompra((prev) => ({
       ...prev,
       items: [{ ...prev.items[0], eventoId, loteId: "" }],
@@ -42,10 +33,11 @@ export default function ComprarEntradas() {
       return;
     }
 
-    // Traer lotes del evento seleccionado
     setCargandoLotes(true);
     try {
-      const res = await fetch(`http://localhost:5281/api/lotes?eventoId=${eventoId}`);
+      const res = await fetch(
+        `http://localhost:5281/api/lotes?eventoId=${eventoId}`
+      );
       const data = await res.json();
       setLotes(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -56,10 +48,8 @@ export default function ComprarEntradas() {
     }
   };
 
-  // Maneja cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (["loteId", "cantidad"].includes(name)) {
       setCompra((prev) => ({
         ...prev,
@@ -70,10 +60,8 @@ export default function ComprarEntradas() {
     }
   };
 
-  // Enviar la compra
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!compra.items[0].loteId) {
       alert("⚠️ Debes seleccionar un lote disponible antes de comprar.");
       return;
@@ -88,19 +76,12 @@ export default function ComprarEntradas() {
 
       if (res.ok) {
         alert("✅ Compra realizada con éxito");
-        // Limpiar el formulario
         setCompra({
           usuarioId: null,
           email: "",
           direccionEnvio: "",
           metodoPago: "Simulado",
-          items: [
-            {
-              eventoId: "",
-              loteId: "",
-              cantidad: 1,
-            },
-          ],
+          items: [{ eventoId: "", loteId: "", cantidad: 1 }],
         });
         setLotes([]);
       } else {
@@ -115,43 +96,37 @@ export default function ComprarEntradas() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-3xl font-bold mb-6">🎟️ Comprar Entradas</h1>
+    <div className="ce-page">
+      <h1 className="ce-title">🎟️ Comprar Entradas</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg mx-auto"
-      >
-        {/* Email */}
-        <label className="block mb-2 font-semibold">Email</label>
+      <form onSubmit={handleSubmit} className="ce-form">
+        <label className="ce-label">Email</label>
         <input
           type="email"
           name="email"
           placeholder="tuemail@ejemplo.com"
           value={compra.email}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ce-input"
           required
         />
 
-        {/* Dirección */}
-        <label className="block mb-2 font-semibold">Dirección</label>
+        <label className="ce-label">Dirección</label>
         <input
           type="text"
           name="direccionEnvio"
           placeholder="Av. Siempre Viva 742"
           value={compra.direccionEnvio}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ce-input"
         />
 
-        {/* Evento */}
-        <label className="block mb-2 font-semibold">Evento</label>
+        <label className="ce-label">Evento</label>
         <select
           name="eventoId"
           value={compra.items[0].eventoId}
           onChange={handleEventoChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ce-select"
           required
         >
           <option value="">Selecciona un evento</option>
@@ -162,13 +137,12 @@ export default function ComprarEntradas() {
           ))}
         </select>
 
-        {/* Lote */}
-        <label className="block mb-2 font-semibold">Lote</label>
+        <label className="ce-label">Lote</label>
         <select
           name="loteId"
           value={compra.items[0].loteId}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ce-select"
           required
           disabled={
             !compra.items[0].eventoId || cargandoLotes || lotes.length === 0
@@ -190,23 +164,18 @@ export default function ComprarEntradas() {
           ))}
         </select>
 
-        {/* Cantidad */}
-        <label className="block mb-2 font-semibold">Cantidad</label>
+        <label className="ce-label">Cantidad</label>
         <input
           type="number"
           name="cantidad"
           min="1"
           value={compra.items[0].cantidad}
           onChange={handleChange}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="ce-input ce-number"
           required
         />
 
-        {/* Botón */}
-        <button
-          type="submit"
-          className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg w-full transition-colors font-semibold"
-        >
+        <button type="submit" className="ce-btn">
           Comprar
         </button>
       </form>
