@@ -1,19 +1,12 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using SistemaABM_Eventos_TransferObject.Eventos;
-
 namespace SistemaABM_Eventos_Repository.Interface;
+
+using SistemaABM_Eventos_TransferObject.ModelsDTO;
 
 public interface IServiceEvento
 {
-    Task<IEnumerable<EventoDto>> ObtenerTodosAsync(CancellationToken cancellationToken = default);
-
-    Task<EventoDto?> ObtenerPorIdAsync(int eventoId, CancellationToken cancellationToken = default);
-
-    Task<EventoDto> CrearAsync(EventoDto eventoDto, CancellationToken cancellationToken = default);
-
-    Task<EventoDto?> ActualizarAsync(int eventoId, EventoDto eventoDto, CancellationToken cancellationToken = default);
-
-    Task<bool> EliminarAsync(int eventoId, CancellationToken cancellationToken = default);
+    Task<List<EventoDTO>> Listar(string? query, DateTime? desde, DateTime? hasta, int page, int pageSize);
+    Task<EventoDTO?> Obtener(int id);
+    Task<int> Crear(EventoCreateDTO dto);
+    Task<bool> Editar(int id, EventoCreateDTO dto);
+    Task<bool> Eliminar(int id);
 }

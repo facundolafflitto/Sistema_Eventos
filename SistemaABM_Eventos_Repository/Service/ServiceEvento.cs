@@ -1,106 +1,56 @@
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SistemaABM_Eventos_Data;
-using SistemaABM_Eventos_Data.Models;
-using SistemaABM_Eventos_Repository.Interface;
-using SistemaABM_Eventos_TransferObject.Eventos;
+using SistemaABM_Eventos_Repository.Interface;         // <- ESTE
+using SistemaABM_Eventos_TransferObject.ModelsDTO;     // DTOs
+using SistemaABM_Eventos_Data;                          // DbContext
+using SistemaABM_Eventos_Data.Models;                   // Entidades (si las usás directo)
+using Microsoft.EntityFrameworkCore;                    // EF Core
 
 namespace SistemaABM_Eventos_Repository.Service;
 
 public class ServiceEvento : IServiceEvento
 {
-    private readonly BDSistemaEventosContext _context;
-    private readonly IMapper _mapper;
+    private readonly BDSistemaEventosContext _db;
+    public ServiceEvento(BDSistemaEventosContext db) => _db = db;
 
-    public ServiceEvento(BDSistemaEventosContext context, IMapper mapper)
+    public async Task<List<EventoDTO>> Listar(string? query, DateTime? desde, DateTime? hasta, int page, int pageSize)
     {
-        _context = context;
-        _mapper = mapper;
-    }
-
-    public async Task<IEnumerable<EventoDto>> ObtenerTodosAsync(CancellationToken cancellationToken = default)
-    {
-        var eventos = await ConstruirConsultaEventos()
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
-
-        return _mapper.Map<IEnumerable<EventoDto>>(eventos);
-    }
-
-    public async Task<EventoDto?> ObtenerPorIdAsync(int eventoId, CancellationToken cancellationToken = default)
-    {
-        var evento = await ConstruirConsultaEventos()
-            .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.EventoId == eventoId, cancellationToken);
-
-        return evento is null ? null : _mapper.Map<EventoDto>(evento);
-    }
-
-    public async Task<EventoDto> CrearAsync(EventoDto eventoDto, CancellationToken cancellationToken = default)
-    {
-        var entidad = _mapper.Map<Evento>(eventoDto);
-
-        await _context.Eventos.AddAsync(entidad, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-
-        var eventoCreado = await ObtenerEventoDetalladoAsync(entidad.EventoId, cancellationToken);
-        return eventoCreado ?? _mapper.Map<EventoDto>(entidad);
-    }
-
-    public async Task<EventoDto?> ActualizarAsync(int eventoId, EventoDto eventoDto, CancellationToken cancellationToken = default)
-    {
-        var eventoExistente = await ConstruirConsultaEventos()
-            .FirstOrDefaultAsync(e => e.EventoId == eventoId, cancellationToken);
-
-        if (eventoExistente is null)
+        var q = _db.Eventos.AsNoTracking().Include(e => e.Venue).AsQueryable();
+        if (!string.IsNullOrWhiteSpace(query))
         {
-            return null;
+            var ql = query.ToLower();
+            q = q.Where(e => e.Nombre.ToLower().Contains(ql) || e.Venue.Nombre.ToLower().Contains(ql) || e.Venue.Ciudad.ToLower().Contains(ql));
         }
+        if (desde is not null) q = q.Where(e => e.FechaHora >= desde);
+        if (hasta is not null) q = q.Where(e => e.FechaHora <= hasta);
 
-        _mapper.Map(eventoDto, eventoExistente);
-        await _context.SaveChangesAsync(cancellationToken);
-
-        return await ObtenerEventoDetalladoAsync(eventoId, cancellationToken);
+        return await q.OrderBy(e => e.FechaHora)
+            .Skip((page - 1) * pageSize).Take(pageSize)
+            .Select(e => new EventoDTO(e.Id, e.Nombre, e.Descripcion, e.FechaHora, e.VenueId, e.Venue.Nombre, e.Categoria, e.ImagenPortadaUrl))
+            .ToListAsync();
     }
 
-    public async Task<bool> EliminarAsync(int eventoId, CancellationToken cancellationToken = default)
+    public async Task<EventoDTO?> Obtener(int id) =>
+        await _db.Eventos.AsNoTracking().Include(e => e.Venue)
+            .Where(e => e.Id == id)
+            .Select(e => new EventoDTO(e.Id, e.Nombre, e.Descripcion, e.FechaHora, e.VenueId, e.Venue.Nombre, e.Categoria, e.ImagenPortadaUrl))
+            .FirstOrDefaultAsync();
+
+    public async Task<int> Crear(EventoCreateDTO dto)
     {
-        var evento = await _context.Eventos
-            .FirstOrDefaultAsync(e => e.EventoId == eventoId, cancellationToken);
-
-        if (evento is null)
-        {
-            return false;
-        }
-
-        _context.Eventos.Remove(evento);
-        await _context.SaveChangesAsync(cancellationToken);
-        return true;
+        if (dto.FechaHora < DateTime.UtcNow.AddMinutes(-1)) throw new InvalidOperationException("Fecha inválida.");
+        var e = new Evento { Nombre = dto.Nombre, Descripcion = dto.Descripcion, FechaHora = dto.FechaHora, VenueId = dto.VenueId, Categoria = dto.Categoria, ImagenPortadaUrl = dto.ImagenPortadaUrl };
+        _db.Eventos.Add(e); await _db.SaveChangesAsync(); return e.Id;
     }
 
-    private IQueryable<Evento> ConstruirConsultaEventos()
+    public async Task<bool> Editar(int id, EventoCreateDTO dto)
     {
-        return _context.Eventos
-            .Include(e => e.Venue)
-            .Include(e => e.Organizador)
-            .Include(e => e.Lotes)
-                .ThenInclude(l => l.Entradas)
-            .Include(e => e.Lotes)
-                .ThenInclude(l => l.DetalleCompras)
-            .Include(e => e.Entradas)
-            .Include(e => e.Compras)
-                .ThenInclude(c => c.Entradas)
-            .Include(e => e.Compras)
-                .ThenInclude(c => c.DetalleCompras)
-            .AsSplitQuery();
+        var e = await _db.Eventos.FindAsync(id); if (e is null) return false;
+        e.Nombre = dto.Nombre; e.Descripcion = dto.Descripcion; e.FechaHora = dto.FechaHora; e.VenueId = dto.VenueId; e.Categoria = dto.Categoria; e.ImagenPortadaUrl = dto.ImagenPortadaUrl;
+        await _db.SaveChangesAsync(); return true;
     }
 
-    private async Task<EventoDto?> ObtenerEventoDetalladoAsync(int eventoId, CancellationToken cancellationToken)
+    public async Task<bool> Eliminar(int id)
     {
-        var eventoActualizado = await ConstruirConsultaEventos()
-            .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.EventoId == eventoId, cancellationToken);
-
-        return eventoActualizado is null ? null : _mapper.Map<EventoDto>(eventoActualizado);
+        var e = await _db.Eventos.FindAsync(id); if (e is null) return false;
+        _db.Eventos.Remove(e); await _db.SaveChangesAsync(); return true;
     }
 }
