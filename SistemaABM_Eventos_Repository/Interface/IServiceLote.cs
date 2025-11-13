@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaABM_Eventos_TransferObject.ModelsDTO;
 
-namespace SistemaABM_Eventos_Repository.Interfaces
+namespace SistemaABM_Eventos_Repository.Interface
 {
     public interface IServiceLote
     {

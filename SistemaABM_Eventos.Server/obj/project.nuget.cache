@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wvbYqSS+umw=",
+  "dgSpecHash": "/WF7Nw8iRio=",
   "success": true,
-  "projectFilePath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos.Server\\SistemaABM_Eventos.Server.csproj",
+  "projectFilePath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos.Server\\SistemaABM_Eventos.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Facundo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Facundo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

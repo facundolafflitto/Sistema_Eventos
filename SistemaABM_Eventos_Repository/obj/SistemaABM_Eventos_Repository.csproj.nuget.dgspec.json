@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj": {}
+    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj": {}
   },
   "projects": {
-    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
+    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
+        "projectUniqueName": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
         "projectName": "SistemaABM_Eventos_Data",
-        "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
+        "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
         "packagesPath": "C:\\Users\\Facundo\\.nuget\\packages\\",
-        "outputPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\obj\\",
+        "outputPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Facundo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -79,14 +79,14 @@
         }
       }
     },
-    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj": {
+    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
+        "projectUniqueName": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
         "projectName": "SistemaABM_Eventos_Repository",
-        "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
+        "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
         "packagesPath": "C:\\Users\\Facundo\\.nuget\\packages\\",
-        "outputPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\obj\\",
+        "outputPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Facundo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -101,11 +101,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
-                "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj"
+              "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
+                "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj"
               },
-              "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
-                "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj"
+              "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
+                "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj"
               }
             }
           }
@@ -155,14 +155,14 @@
         }
       }
     },
-    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
+    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
+        "projectUniqueName": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
         "projectName": "SistemaABM_Eventos_TransferObject",
-        "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
+        "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
         "packagesPath": "C:\\Users\\Facundo\\.nuget\\packages\\",
-        "outputPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\obj\\",
+        "outputPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Facundo\\AppData\\Roaming\\NuGet\\NuGet.Config"

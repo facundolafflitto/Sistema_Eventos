@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SistemaABM_Eventos_Repository.Interfaces;        // IServiceLote
+using SistemaABM_Eventos_Repository.Interface;        // IServiceLote
 using SistemaABM_Eventos_TransferObject.ModelsDTO;     // LoteEntradaDTO (posicional)
 using SistemaABM_Eventos_Data;                         // BDSistemaEventosContext
 using SistemaABM_Eventos_Data.Models;                  // Entidades -> LoteEntrada

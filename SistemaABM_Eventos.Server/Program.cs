@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaABM_Eventos_Data;                    // BDSistemaEventosContext
-using SistemaABM_Eventos_Repository.Interface;   // IServiceEvento
-using SistemaABM_Eventos_Repository.Service;     // ServiceEvento  <-- OJO: namespace "Service", no "Sevice"
+using SistemaABM_Eventos_Repository.Interface;    // Interfaces: IServiceEvento, IServiceLote, etc.
+using SistemaABM_Eventos_Repository.Service;      // Implementaciones: ServiceEvento, etc.
+using SistemaABM_Eventos_Repository.Mapper;       // Perfil de AutoMapper
 
 var builder = WebApplication.CreateBuilder(args);
 
-// servicios base
+// Servicios base
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,14 +20,18 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader());
 });
 
-// EF Core (ajustá el provider/conn string)
+// EF Core
 builder.Services.AddDbContext<BDSistemaEventosContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ⬇️ REGISTRO CLAVE
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+// Servicios de aplicación
 builder.Services.AddScoped<IServiceEvento, ServiceEvento>();
-// Si también tenés venues:
-// builder.Services.AddScoped<IServiceVenue, ServiceVenue>();
+builder.Services.AddScoped<IServiceLote, ServiceLote>();
+builder.Services.AddScoped<IServiceCompra, ServiceCompra>();
+builder.Services.AddScoped<IServiceVenue, ServiceVenue>();
 
 var app = builder.Build();
 
@@ -36,7 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();      // si te molesta el warning de https, podés comentarlo en dev
+app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 

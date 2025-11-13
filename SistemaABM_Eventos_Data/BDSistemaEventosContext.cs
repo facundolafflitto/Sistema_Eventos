@@ -27,7 +27,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .Property(c => c.Total)
         .HasPrecision(18, 2);
 
-    // Evitar múltiples cascadas
+    modelBuilder.Entity<LoteEntrada>()
+        .Property(l => l.RowVersion)
+        .IsRowVersion()
+        .IsConcurrencyToken();
+
     modelBuilder.Entity<Entrada>()
         .HasOne(e => e.LoteEntrada)
         .WithMany()
@@ -36,6 +40,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
     base.OnModelCreating(modelBuilder);
 }
+
 
 
 }

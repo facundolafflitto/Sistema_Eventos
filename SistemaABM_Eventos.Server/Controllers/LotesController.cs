@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SistemaABM_Eventos_Repository.Interfaces;      // ✅ plural
+using SistemaABM_Eventos_Repository.Interface;      
 using SistemaABM_Eventos_TransferObject.ModelsDTO;
 
 namespace SistemaABM_Eventos.Server.Controllers;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KMqHwUKifY0=",
+  "dgSpecHash": "fZmp3UWkVXw=",
   "success": true,
-  "projectFilePath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
+  "projectFilePath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Facundo\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Facundo\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
