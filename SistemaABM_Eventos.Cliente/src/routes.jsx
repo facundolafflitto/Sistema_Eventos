@@ -20,15 +20,14 @@ import CrearVenue from "./vistas/Venues/CrearVenue";
 import ComprarEntradas from "./vistas/Compras/ComprarEntradas";
 import ValidarEntrada from "./vistas/Compras/ValidarEntrada";
 
+// Auth
+import Login from "./vistas/Auth/Login";
+
 export default function AppRoutes() {
   return (
     <Router>
-      {/* Fondo global y texto claro */}
       <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-        {/* Navbar fija arriba */}
         <Navbar />
-
-        {/* Contenido principal */}
         <main className="flex-grow p-4 md:p-8">
           <Routes>
             {/* Eventos */}
@@ -39,10 +38,7 @@ export default function AppRoutes() {
 
             {/* Lotes */}
             <Route path="/eventos/:eventoId/lotes" element={<ListaLotes />} />
-            <Route
-              path="/eventos/:eventoId/lotes/crear"
-              element={<CrearLote />}
-            />
+            <Route path="/eventos/:eventoId/lotes/crear" element={<CrearLote />} />
             <Route path="/lotes/editar/:id" element={<EditarLote />} />
 
             {/* Venues */}
@@ -52,6 +48,9 @@ export default function AppRoutes() {
             {/* Compras */}
             <Route path="/compras" element={<ComprarEntradas />} />
             <Route path="/validar" element={<ValidarEntrada />} />
+
+            {/* Login */}
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>

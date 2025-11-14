@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using SistemaABM_Eventos_Data;                    // BDSistemaEventosContext
-using SistemaABM_Eventos_Repository.Interface;    // Interfaces: IServiceEvento, IServiceLote, etc.
-using SistemaABM_Eventos_Repository.Service;      // Implementaciones: ServiceEvento, etc.
-using SistemaABM_Eventos_Repository.Mapper;       // Perfil de AutoMapper
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using SistemaABM_Eventos_Data;
+using SistemaABM_Eventos_Repository.Interface;
+using SistemaABM_Eventos_Repository.Service;
+using SistemaABM_Eventos_Repository.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +30,28 @@ builder.Services.AddDbContext<BDSistemaEventosContext>(opt =>
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
+// JWT Auth
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(key)
+        };
+    });
+
 // Servicios de aplicación
 builder.Services.AddScoped<IServiceEvento, ServiceEvento>();
 builder.Services.AddScoped<IServiceLote, ServiceLote>();
 builder.Services.AddScoped<IServiceCompra, ServiceCompra>();
 builder.Services.AddScoped<IServiceVenue, ServiceVenue>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
@@ -43,6 +63,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

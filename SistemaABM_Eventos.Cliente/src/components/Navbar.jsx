@@ -5,12 +5,13 @@ export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  const links = [
-    { to: "/", label: "Eventos" },
-    { to: "/venues", label: "Venues" },
-    { to: "/compras", label: "Comprar" },
-    { to: "/validar", label: "Validar" },
-  ];
+ const links = [
+  { to: "/", label: "Eventos" },
+  { to: "/venues", label: "Venues" },
+  { to: "/compras", label: "Comprar" },
+  { to: "/validar", label: "Validar" },
+  { to: "/login", label: "Login" }, 
+];
 
   return (
     <nav className="bg-gray-900 text-white border-b border-gray-800">
