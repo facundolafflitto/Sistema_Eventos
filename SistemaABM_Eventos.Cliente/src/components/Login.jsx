@@ -1,19 +1,23 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import { login as loginService } from "../../services/authService";
+import { useAuth } from "../../context/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const token = await login(email, password);
-      localStorage.setItem("token", token);
-      alert("Login exitoso");
+      const token = await loginService(email, password);
+      login(token); // guarda token y usuario
+      navigate("/");
     } catch (error) {
-        console.error(error);
-         alert("Credenciales incorrectas");
+      console.error(error);
+      alert("Credenciales incorrectas");
     }
   }
 

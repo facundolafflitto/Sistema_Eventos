@@ -1,18 +1,22 @@
-import { useState } from "react";
-import { login } from "../../services/authService";
+import { useState, useContext } from "react";
+import { login as loginService } from "../../services/authService";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const token = await login(email, password);
-      localStorage.setItem("token", token);
-      navigate("/"); // Redirige al home u otra ruta deseada
+      const token = await loginService(email, password);
+      // suponiendo que tu backend te devuelve también el nombre o email
+      const userInfo = { email }; 
+      login(token, userInfo);
+      navigate("/");
     } catch (error) {
       console.error(error);
       alert("Credenciales incorrectas");

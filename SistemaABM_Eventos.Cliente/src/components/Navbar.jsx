@@ -1,30 +1,28 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/useAuth";
 
 export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const { user, logout } = useAuth();
 
- const links = [
-  { to: "/", label: "Eventos" },
-  { to: "/venues", label: "Venues" },
-  { to: "/compras", label: "Comprar" },
-  { to: "/validar", label: "Validar" },
-  { to: "/login", label: "Login" }, 
-];
+  const links = [
+    { to: "/", label: "Eventos" },
+    { to: "/venues", label: "Venues" },
+    { to: "/compras", label: "Comprar" },
+    { to: "/validar", label: "Validar" },
+  ];
 
   return (
     <nav className="bg-gray-900 text-white border-b border-gray-800">
       <div className="container mx-auto flex justify-between items-center p-4">
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-2xl font-bold text-pink-400 hover:text-pink-300 transition-colors"
-        >
+        <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-pink-400 hover:text-pink-300">
           🎟 <span>Sistema Eventos</span>
         </Link>
 
-        <div className="hidden md:flex gap-6">
-          {links.map((link) => (
+        <div className="hidden md:flex gap-6 items-center">
+          {links.map(link => (
             <Link
               key={link.to}
               to={link.to}
@@ -35,6 +33,14 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          {user ? (
+            <>
+              <span className="text-white">Hola, {user.email}</span>
+              <button onClick={logout} className="hover:text-blue-400 transition-colors">Logout</button>
+            </>
+          ) : (
+            <Link to="/login" className="hover:text-blue-400 transition-colors">Login</Link>
+          )}
         </div>
 
         <button
@@ -47,7 +53,7 @@ export default function Navbar() {
 
       {open && (
         <div className="md:hidden bg-gray-800 flex flex-col items-center gap-4 py-4 border-t border-gray-700">
-          {links.map((link) => (
+          {links.map(link => (
             <Link
               key={link.to}
               to={link.to}
@@ -59,6 +65,16 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          {user ? (
+            <>
+              <span className="text-white">Hola, {user.email}</span>
+              <button onClick={logout} className="hover:text-blue-400 transition-colors">Logout</button>
+            </>
+          ) : (
+            <Link to="/login" className="hover:text-blue-400 transition-colors" onClick={() => setOpen(false)}>
+              Login
+            </Link>
+          )}
         </div>
       )}
     </nav>

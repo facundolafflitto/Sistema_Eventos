@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 // Eventos
@@ -25,35 +25,33 @@ import Login from "./vistas/Auth/Login";
 
 export default function AppRoutes() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-        <Navbar />
-        <main className="flex-grow p-4 md:p-8">
-          <Routes>
-            {/* Eventos */}
-            <Route path="/" element={<ListaEventos />} />
-            <Route path="/eventos/crear" element={<CrearEvento />} />
-            <Route path="/eventos/editar/:id" element={<EditarEvento />} />
-            <Route path="/eventos/:id" element={<VerEvento />} />
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+      <Navbar />
+      <main className="flex-grow p-4 md:p-8">
+        <Routes>
+          {/* Eventos */}
+          <Route path="/" element={<ListaEventos />} />
+          <Route path="/eventos/crear" element={<CrearEvento />} />
+          <Route path="/eventos/editar/:id" element={<EditarEvento />} />
+          <Route path="/eventos/:id" element={<VerEvento />} />
 
-            {/* Lotes */}
-            <Route path="/eventos/:eventoId/lotes" element={<ListaLotes />} />
-            <Route path="/eventos/:eventoId/lotes/crear" element={<CrearLote />} />
-            <Route path="/lotes/editar/:id" element={<EditarLote />} />
+          {/* Lotes */}
+          <Route path="/eventos/:eventoId/lotes" element={<ListaLotes />} />
+          <Route path="/eventos/:eventoId/lotes/crear" element={<CrearLote />} />
+          <Route path="/lotes/editar/:id" element={<EditarLote />} />
 
-            {/* Venues */}
-            <Route path="/venues" element={<ListaVenues />} />
-            <Route path="/venues/crear" element={<CrearVenue />} />
+          {/* Venues */}
+          <Route path="/venues" element={<ListaVenues />} />
+          <Route path="/venues/crear" element={<CrearVenue />} />
 
-            {/* Compras */}
-            <Route path="/compras" element={<ComprarEntradas />} />
-            <Route path="/validar" element={<ValidarEntrada />} />
+          {/* Compras */}
+          <Route path="/compras" element={<ComprarEntradas />} />
+          <Route path="/validar" element={<ValidarEntrada />} />
 
-            {/* Login */}
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+          {/* Login */}
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
