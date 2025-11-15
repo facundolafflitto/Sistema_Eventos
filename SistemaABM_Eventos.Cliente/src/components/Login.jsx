@@ -12,8 +12,8 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const token = await loginService(email, password);
-      login(token); // guarda token y usuario
+      const data = await loginService(email, password); 
+      login(data); // ⬅️ PASO EL OBJETO ENTERO
       navigate("/");
     } catch (error) {
       console.error(error);

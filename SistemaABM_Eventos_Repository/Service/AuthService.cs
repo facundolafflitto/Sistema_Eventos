@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using SistemaABM_Eventos_Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using SistemaABM_Eventos_Data.Models;
+using SistemaABM_Eventos_Repository.Interface;
 
 public class AuthService : IAuthService
 {
@@ -17,32 +19,18 @@ public class AuthService : IAuthService
         _config = config;
     }
 
-    public async Task<string?> Login(string email, string password)
+    public async Task<(string token, Usuario usuario)?> Login(string email, string password)
     {
-        Console.WriteLine($"Intentando login con email: {email}");
-
         var user = await _db.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
-        if (user is null)
-        {
-            Console.WriteLine("Usuario no encontrado.");
-            return null;
-        }
+        if (user == null) return null;
 
-        Console.WriteLine($"Usuario encontrado: {user.Email}");
-
-        // Comparación directa sin hash
-        if (user.PasswordHash != password)
-        {
-            Console.WriteLine("Contraseña inválida.");
-            return null;
-        }
-
-        Console.WriteLine("Login exitoso");
+        if (user.PasswordHash != password) return null;
 
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Email)
+            new Claim(ClaimTypes.Name, user.Email),
+            new Claim(ClaimTypes.Role, user.Rol) // 👈 AHORA SÍ
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -56,6 +44,8 @@ public class AuthService : IAuthService
             signingCredentials: creds
         );
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+        return (jwt, user);
     }
 }

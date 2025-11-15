@@ -1,4 +1,6 @@
+using SistemaABM_Eventos_Data.Models;
+
 public interface IAuthService
 {
-    Task<string?> Login(string email, string password);
+    Task<(string token, Usuario usuario)?> Login(string email, string password);
 }

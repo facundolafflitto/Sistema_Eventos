@@ -13,10 +13,22 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("login")]
-    public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO dto)
-    {
-        var token = await _authService.Login(dto.Email, dto.Password);
-        return token is null ? Unauthorized() : Ok(new LoginResponseDTO(token));
-    }
+[HttpPost("login")]
+public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO dto)
+{
+    var result = await _authService.Login(dto.Email, dto.Password);
+
+    if (result is null)
+        return Unauthorized();
+
+    var (token, usuario) = result.Value;
+
+    return Ok(new LoginResponseDTO(
+        token,
+        usuario.Email,
+        usuario.Nombre,
+        usuario.Rol   
+    ));
+}
+
 }

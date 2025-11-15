@@ -1,59 +1,84 @@
-:root {
-  --bg-900: #111827;
-  --bg-800: #1f2937;
-  --text: #ffffff;
-  --muted: #c6cdd8;
-  --radius: 14px;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== Page ===== */
 .vv-page {
-  min-height: 100vh;
-  background: var(--bg-900);
-  color: var(--text);
+  max-width: 800px;
+  margin: auto;
   padding: 2rem;
-  box-sizing: border-box;
 }
 
-/* ===== Back link ===== */
 .vv-back {
+  display: block;
+  margin-bottom: 1rem;
   color: #93c5fd;
   text-decoration: none;
-  margin-bottom: 1rem;
-  display: inline-block;
 }
 
-.vv-back:hover {
-  text-decoration: underline;
-}
-
-/* ===== Title ===== */
 .vv-title {
-  font-size: 1.875rem;
-  font-weight: 800;
-  margin: 0.25rem 0 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-/* ===== Text ===== */
 .vv-text {
-  margin: 0.25rem 0 1rem;
-  color: var(--muted);
+  margin-bottom: 1rem;
 }
 
-/* ===== Image ===== */
 .vv-img {
-  margin-top: 1rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
   width: 100%;
-  max-width: 56rem;
-  object-fit: cover;
-  display: block;
+  border-radius: 8px;
 }
 
-/* ===== Loading ===== */
-.vv-loading {
-  color: #ffffff;
-  padding: 1.5rem;
+.vv-boton {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.vv-boton.cerrar {
+  background-color: #ef4444;
+  margin-top: 1rem;
+}
+
+.vv-boton:hover {
+  opacity: 0.9;
+}
+
+.vv-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.vv-modal {
+  background-color: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.vv-modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.vv-modal-section {
+  margin-bottom: 1rem;
+}
+
+.vv-modal-section p {
+  margin: 0.3rem 0 0 0.5rem;
 }

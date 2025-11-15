@@ -1,0 +1,96 @@
+.carrito-page {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.carrito-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #93c5fd;
+  margin-bottom: 2rem;
+}
+
+.carrito-empty {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+.carrito-item {
+  display: flex;
+  gap: 1rem;
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.carrito-img {
+  width: 150px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.carrito-info {
+  flex: 1;
+}
+
+.carrito-select {
+  width: 100%;
+  background: #374151;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.carrito-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.carrito-cantidad button {
+  background: #374151;
+  border: none;
+  color: white;
+  padding: 4px 12px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+.carrito-cantidad span {
+  font-size: 1.2rem;
+}
+
+.carrito-remove {
+  background: #ef4444;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.carrito-total {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.carrito-pagar {
+  margin-top: 1rem;
+  background: #10b981;
+  padding: 12px 24px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}

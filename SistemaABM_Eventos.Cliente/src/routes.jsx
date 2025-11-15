@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
+
 // Eventos
 import ListaEventos from "./vistas/Eventos/ListaEventos";
 import CrearEvento from "./vistas/Eventos/CrearEvento";
@@ -19,6 +20,8 @@ import CrearVenue from "./vistas/Venues/CrearVenue";
 // Compras
 import ComprarEntradas from "./vistas/Compras/ComprarEntradas";
 import ValidarEntrada from "./vistas/Compras/ValidarEntrada";
+import CarritoPage from "./vistas/Compras/CarritoPage";
+
 
 // Auth
 import Login from "./vistas/Auth/Login";
@@ -45,10 +48,10 @@ export default function AppRoutes() {
           <Route path="/venues/crear" element={<CrearVenue />} />
 
           {/* Compras */}
-          <Route path="/compras" element={<ComprarEntradas />} />
           <Route path="/validar" element={<ValidarEntrada />} />
+          <Route path="/carrito" element={<CarritoPage />} />
 
-          {/* Login */}
+          {/* Auth */}
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>

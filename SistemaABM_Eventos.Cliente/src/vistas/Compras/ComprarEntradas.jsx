@@ -14,11 +14,33 @@ export default function ComprarEntradas() {
     items: [{ eventoId: "", loteId: "", cantidad: 1 }],
   });
 
+  // Cargar eventos
   useEffect(() => {
     fetch("http://localhost:5281/api/eventos")
       .then((res) => res.json())
       .then((data) => setEventos(data))
       .catch((err) => console.error("Error al cargar eventos:", err));
+  }, []);
+
+  // Cargar carrito desde localStorage
+  useEffect(() => {
+    const guardado = localStorage.getItem("carrito_evento");
+    if (!guardado) return;
+
+    const evento = JSON.parse(guardado);
+
+    setCompra((prev) => ({
+      ...prev,
+      items: [{ ...prev.items[0], eventoId: evento.id }],
+    }));
+
+    // cargar lotes automáticamente
+    setCargandoLotes(true);
+    fetch(`http://localhost:5281/api/lotes?eventoId=${evento.id}`)
+      .then((res) => res.json())
+      .then((data) => setLotes(data))
+      .catch(console.error)
+      .finally(() => setCargandoLotes(false));
   }, []);
 
   const handleEventoChange = async (e) => {
@@ -63,7 +85,7 @@ export default function ComprarEntradas() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!compra.items[0].loteId) {
-      alert("⚠️ Debes seleccionar un lote disponible antes de comprar.");
+      alert("⚠️ Debes seleccionar un lote antes de comprar.");
       return;
     }
 
@@ -76,6 +98,10 @@ export default function ComprarEntradas() {
 
       if (res.ok) {
         alert("✅ Compra realizada con éxito");
+
+        // Vacía el carrito
+        localStorage.removeItem("carrito_evento");
+
         setCompra({
           usuarioId: null,
           email: "",
@@ -144,9 +170,7 @@ export default function ComprarEntradas() {
           onChange={handleChange}
           className="ce-select"
           required
-          disabled={
-            !compra.items[0].eventoId || cargandoLotes || lotes.length === 0
-          }
+          disabled={!compra.items[0].eventoId || cargandoLotes || lotes.length === 0}
         >
           <option value="">
             {cargandoLotes
@@ -157,6 +181,7 @@ export default function ComprarEntradas() {
               ? "Este evento no tiene lotes disponibles"
               : "Selecciona un lote"}
           </option>
+
           {lotes.map((lote) => (
             <option key={lote.id} value={lote.id}>
               {lote.nombre} - ${lote.precio} (Disp: {lote.cupo - lote.vendidas})

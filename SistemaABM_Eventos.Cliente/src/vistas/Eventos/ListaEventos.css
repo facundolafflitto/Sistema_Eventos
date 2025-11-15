@@ -10,46 +10,36 @@
   --t: 0.2s ease;
 }
 
-/* ===== Page ===== */
 .le-page {
   min-height: 100vh;
   background: var(--bg-900);
   color: var(--text);
   padding: 2.5rem 1.5rem;
-  box-sizing: border-box;
 }
 
-/* ===== Container ===== */
 .le-container {
   max-width: 1120px;
   margin: 0 auto;
 }
 
-/* ===== Title ===== */
 .le-title {
   font-size: 2rem;
   font-weight: 900;
   margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   color: #93c5fd;
 }
 
-/* ===== Empty state ===== */
 .le-empty {
   color: var(--muted);
   font-size: 1.125rem;
 }
 
-/* ===== Grid ===== */
 .le-grid {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
-/* ===== Card ===== */
 .le-card {
   background: var(--bg-800);
   border-radius: var(--radius);
@@ -65,23 +55,19 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
 }
 
-/* ===== Image ===== */
 .le-img {
   width: 100%;
   height: 13rem;
   object-fit: cover;
 }
 
-/* ===== Card body ===== */
 .le-body {
   padding: 1.1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
+  gap: 0.8rem;
 }
 
-/* ===== Text ===== */
 .le-name {
   font-size: 1.375rem;
   font-weight: 700;
@@ -101,23 +87,42 @@
   font-size: 0.9rem;
   color: var(--muted);
   display: flex;
-  align-items: center;
   gap: 0.5rem;
-  margin-top: 0.25rem;
 }
 
-/* ===== Button link ===== */
+/* ⭐ Botón azul */
 .le-link {
-  margin-top: auto;
-  text-align: center;
+  display: block;
+  width: 100%;
   background: var(--tile);
   color: #0b254b;
   font-weight: 600;
   padding: 0.6rem 1rem;
+  text-align: center;
   border-radius: 10px;
   transition: background var(--t);
+  cursor: pointer;
+  border: none;
 }
 
 .le-link:hover {
   background: var(--tile-hover);
+}
+
+/* ⭐ Botón verde */
+.le-link-green {
+  display: block;
+  width: 100%;
+  background: #10b981;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background var(--t);
+  cursor: pointer;
+  border: none;
+}
+
+.le-link-green:hover {
+  background: #059669;
 }
