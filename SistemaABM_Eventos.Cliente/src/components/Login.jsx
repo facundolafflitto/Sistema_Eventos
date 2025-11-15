@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     try {
       const data = await loginService(email, password); 
-      login(data); // ⬅️ PASO EL OBJETO ENTERO
+      login(data); 
       navigate("/");
     } catch (error) {
       console.error(error);

@@ -7,7 +7,6 @@ export default function EditarEvento() {
   const { id } = useParams();
   const { user } = useAuth();
 
-  // 🟢 1. HOOKS PRIMERO (SIEMPRE)
   const [form, setForm] = useState({
     nombre: "",
     descripcion: "",
@@ -19,7 +18,6 @@ export default function EditarEvento() {
 
   const [venues, setVenues] = useState([]);
 
-  // 🟢 2. CARGA DE DATOS (HOOK)
   useEffect(() => {
     fetch(`http://localhost:5281/api/eventos/${id}`)
       .then((r) => r.json())
@@ -32,7 +30,6 @@ export default function EditarEvento() {
       .catch(console.error);
   }, [id]);
 
-  // 🟢 3. HANDLERS (PUEDEN ESTAR ANTES DEL RETURN)
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -50,7 +47,6 @@ export default function EditarEvento() {
       .catch(console.error);
   };
 
-  // 🔴 4. VALIDACIÓN DE ACCESO (DESPUÉS DE LOS HOOKS)
   if (!user || user.rol !== "Admin") {
     return (
       <div className="ee-denied">

@@ -11,7 +11,7 @@ export default function ListaEventos() {
   const navigate = useNavigate();
 
   const { user } = useAuth();
-  const { agregar } = useCarrito();   // ✔️ CARRITO REAL
+  const { agregar } = useCarrito();
 
   useEffect(() => {
     fetch("http://localhost:5281/api/eventos")
@@ -20,20 +20,34 @@ export default function ListaEventos() {
       .catch((err) => console.error("Error al cargar eventos:", err));
   }, []);
 
+  // ⭐ ELIMINAR EVENTO (solo admin)
+  const handleDelete = async (id) => {
+    const ok = confirm("¿Seguro que querés eliminar este evento?");
+    if (!ok) return;
+
+    const res = await fetch(`http://localhost:5281/api/eventos/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      alert("Evento eliminado");
+      setEventos(eventos.filter((ev) => ev.id !== id));
+    } else {
+      alert("No se pudo eliminar el evento");
+    }
+  };
+
   return (
     <div className="le-page">
       <div className="le-container">
-
         <h1 className="le-title">🎭 Eventos</h1>
 
         {eventos.length === 0 ? (
           <p className="le-empty">No hay eventos disponibles.</p>
         ) : (
           <div className="le-grid">
-
             {eventos.map((evento) => (
               <div key={evento.id} className="le-card">
-
                 <img
                   src={evento.imagenPortadaUrl || "https://via.placeholder.com/400x250"}
                   alt={evento.nombre}
@@ -55,7 +69,6 @@ export default function ListaEventos() {
                     Ver detalles
                   </button>
 
-                  {/* 🛒 USAMOS CARRITO REAL */}
                   <button
                     className="le-link-green"
                     onClick={() => agregar(evento)}
@@ -63,7 +76,7 @@ export default function ListaEventos() {
                     Agregar al carrito
                   </button>
 
-                  {/* ✏️ SOLO ADMIN */}
+                  {/* ✏️ SOLO ADMIN - EDITAR */}
                   {user?.rol === "Admin" && (
                     <button
                       className="le-link-edit"
@@ -73,10 +86,19 @@ export default function ListaEventos() {
                     </button>
                   )}
 
+                  {/* 🗑️ SOLO ADMIN - ELIMINAR */}
+                  {user?.rol === "Admin" && (
+                    <button
+                      className="le-link-delete"
+                      onClick={() => handleDelete(evento.id)}
+                    >
+                      🗑️ Eliminar evento
+                    </button>
+                  )}
+
                 </div>
               </div>
             ))}
-
           </div>
         )}
       </div>

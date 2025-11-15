@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
-
 // Eventos
 import ListaEventos from "./vistas/Eventos/ListaEventos";
 import CrearEvento from "./vistas/Eventos/CrearEvento";
@@ -21,7 +20,7 @@ import CrearVenue from "./vistas/Venues/CrearVenue";
 import ComprarEntradas from "./vistas/Compras/ComprarEntradas";
 import ValidarEntrada from "./vistas/Compras/ValidarEntrada";
 import CarritoPage from "./vistas/Compras/CarritoPage";
-
+import MisCompras from "./vistas/Compras/MisCompras";   // <-- ACA
 
 // Auth
 import Login from "./vistas/Auth/Login";
@@ -32,6 +31,7 @@ export default function AppRoutes() {
       <Navbar />
       <main className="flex-grow p-4 md:p-8">
         <Routes>
+
           {/* Eventos */}
           <Route path="/" element={<ListaEventos />} />
           <Route path="/eventos/crear" element={<CrearEvento />} />
@@ -50,6 +50,7 @@ export default function AppRoutes() {
           {/* Compras */}
           <Route path="/validar" element={<ValidarEntrada />} />
           <Route path="/carrito" element={<CarritoPage />} />
+          <Route path="/mis-compras" element={<MisCompras />} />   {/* <-- ACA */}
 
           {/* Auth */}
           <Route path="/login" element={<Login />} />

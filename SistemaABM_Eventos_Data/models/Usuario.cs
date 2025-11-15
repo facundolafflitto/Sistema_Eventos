@@ -10,7 +10,6 @@ namespace SistemaABM_Eventos_Data.Models
         public string? Telefono { get; set; }
         public string? Direccion { get; set; }
         public DateTime Creado { get; set; } = DateTime.UtcNow;
-
-        public string Rol { get; set; } = "Usuario"; // 👈 AGREGADO
+        public string Rol { get; set; } = "Usuario"; 
     }
 }

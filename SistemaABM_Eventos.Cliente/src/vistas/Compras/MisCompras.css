@@ -1,0 +1,61 @@
+.mc-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.mc-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #93c5fd;
+}
+
+.mc-empty,
+.mc-login-msg {
+  text-align: center;
+  color: #bbb;
+  font-size: 1.2rem;
+}
+
+.mc-card {
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #374151;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.mc-card-title {
+  color: #60a5fa;
+  margin-bottom: 0.5rem;
+}
+
+.mc-subtitle {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #9ca3af;
+}
+
+.mc-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.mc-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #374151;
+}
+
+.mc-item:last-child {
+  border-bottom: none;
+}
+
+.mc-code {
+  font-size: 0.9rem;
+  color: #93c5fd;
+}

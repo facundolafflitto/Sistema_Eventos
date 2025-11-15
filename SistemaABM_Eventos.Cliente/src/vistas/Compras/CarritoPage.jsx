@@ -32,16 +32,13 @@ export default function CarritoPage() {
     return acc + lote.precio * item.cantidad;
   }, 0);
 
-  // ----------------------------
-  //   FINALIZAR COMPRA
-  // ----------------------------
+
   const finalizarCompra = async () => {
     if (carrito.length === 0) {
       alert("Tu carrito está vacío.");
       return;
     }
 
-    // Validar lotes
     const faltanLotes = carrito.some((item) => !item.loteId);
     if (faltanLotes) {
       alert("Seleccioná un lote para cada evento antes de comprar.");
@@ -126,7 +123,7 @@ export default function CarritoPage() {
               ))}
             </select>
 
-            {/* Cantidad */}
+            {}
             <label>Cantidad</label>
             <div className="carrito-cantidad">
               <button

@@ -10,7 +10,6 @@
   --t: 0.18s ease;
 }
 
-/* ===== Page ===== */
 .ee-page {
   min-height: 100vh;
   background: var(--bg-900);
@@ -19,14 +18,12 @@
   box-sizing: border-box;
 }
 
-/* ===== Title ===== */
 .ee-title {
   font-size: 1.875rem;
   font-weight: 800;
   margin: 0 0 1.5rem;
 }
 
-/* ===== Form Card ===== */
 .ee-card {
   background: var(--bg-800);
   padding: 1.5rem;
@@ -36,7 +33,6 @@
   margin: 0 auto;
 }
 
-/* ===== Inputs ===== */
 .ee-input,
 .ee-textarea,
 .ee-select {
@@ -58,7 +54,6 @@
   transform: translateY(-1px);
 }
 
-/* ===== Button ===== */
 .ee-btn {
   width: 100%;
   padding: 0.65rem 1rem;

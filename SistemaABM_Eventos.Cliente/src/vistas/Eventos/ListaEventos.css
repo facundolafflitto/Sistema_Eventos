@@ -126,3 +126,20 @@
 .le-link-green:hover {
   background: #059669;
 }
+
+.le-link-delete {
+  background: #d9534f;
+  color: white;
+  padding: 8px 12px;
+  margin-top: 6px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  transition: background 0.2s;
+}
+
+.le-link-delete:hover {
+  background: #c9302c;
+}

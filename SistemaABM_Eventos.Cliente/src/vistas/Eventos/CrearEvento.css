@@ -10,7 +10,6 @@
   --t: 0.18s ease;
 }
 
-/* ===== Page ===== */
 .ce2-page {
   min-height: 100vh;
   background: var(--bg-900);
@@ -19,14 +18,12 @@
   box-sizing: border-box;
 }
 
-/* ===== Title ===== */
 .ce2-title {
   font-size: 1.875rem;
   font-weight: 800;
   margin: 0 0 1.5rem;
 }
 
-/* ===== Form Card ===== */
 .ce2-card {
   background: var(--bg-800);
   padding: 1.5rem;
@@ -36,7 +33,6 @@
   margin: 0 auto;
 }
 
-/* ===== Inputs & Selects ===== */
 .ce2-input,
 .ce2-textarea,
 .ce2-select {
@@ -58,7 +54,6 @@
   transform: translateY(-1px);
 }
 
-/* ===== Button ===== */
 .ce2-btn {
   width: 100%;
   padding: 0.65rem 1rem;

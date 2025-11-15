@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SistemaABM_Eventos_Repository.Interface;        // IServiceLote
-using SistemaABM_Eventos_TransferObject.ModelsDTO;     // LoteEntradaDTO (posicional)
-using SistemaABM_Eventos_Data;                         // BDSistemaEventosContext
-using SistemaABM_Eventos_Data.Models;                  // Entidades -> LoteEntrada
+using SistemaABM_Eventos_Repository.Interface;        
+using SistemaABM_Eventos_TransferObject.ModelsDTO;    
+using SistemaABM_Eventos_Data;                        
+using SistemaABM_Eventos_Data.Models;                  
 
-namespace SistemaABM_Eventos_Repository.Service         // ✅ corregido: "Service" (no "Sevice")
+namespace SistemaABM_Eventos_Repository.Service         
 {
     public class ServiceLote : IServiceLote
     {
