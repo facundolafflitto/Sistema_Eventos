@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SistemaABM_Eventos_Repository.Interface;        
-using SistemaABM_Eventos_TransferObject.ModelsDTO;    
-using SistemaABM_Eventos_Data;                        
-using SistemaABM_Eventos_Data.Models;                  
+using SistemaABM_Eventos_Repository.Interface;
+using SistemaABM_Eventos_TransferObject.ModelsDTO;
+using SistemaABM_Eventos_Data;
+using SistemaABM_Eventos_Data.Models;
 
-namespace SistemaABM_Eventos_Repository.Service         
+namespace SistemaABM_Eventos_Repository.Service
 {
     public class ServiceLote : IServiceLote
     {
@@ -30,9 +30,7 @@ namespace SistemaABM_Eventos_Repository.Service
                     l.Nombre,
                     l.Precio,
                     l.Cupo,
-                    l.Vendidas,
-                    l.VigenteDesde,
-                    l.VigenteHasta
+                    l.Vendidas
                 ))
                 .ToListAsync();
         }
@@ -41,13 +39,11 @@ namespace SistemaABM_Eventos_Repository.Service
         {
             var lote = new LoteEntrada
             {
-                EventoId      = dto.EventoId,
-                Nombre        = dto.Nombre,
-                Precio        = dto.Precio,
-                Cupo          = dto.Cupo,
-                Vendidas      = dto.Vendidas,
-                VigenteDesde  = dto.VigenteDesde,
-                VigenteHasta  = dto.VigenteHasta
+                EventoId = dto.EventoId,
+                Nombre = dto.Nombre,
+                Precio = dto.Precio,
+                Cupo = dto.Cupo,
+                Vendidas = dto.Vendidas
             };
 
             _context.Lotes.Add(lote);
@@ -60,12 +56,10 @@ namespace SistemaABM_Eventos_Repository.Service
             var lote = await _context.Lotes.FindAsync(dto.Id);
             if (lote is null) return false;
 
-            lote.Nombre       = dto.Nombre;
-            lote.Precio       = dto.Precio;
-            lote.Cupo         = dto.Cupo;
-            lote.Vendidas     = dto.Vendidas;
-            lote.VigenteDesde = dto.VigenteDesde;
-            lote.VigenteHasta = dto.VigenteHasta;
+            lote.Nombre = dto.Nombre;
+            lote.Precio = dto.Precio;
+            lote.Cupo = dto.Cupo;
+            lote.Vendidas = dto.Vendidas;
 
             await _context.SaveChangesAsync();
             return true;

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {}
+    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {}
   },
   "projects": {
-    "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
+    "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
+        "projectUniqueName": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
         "projectName": "SistemaABM_Eventos_TransferObject",
-        "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
+        "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj",
         "packagesPath": "C:\\Users\\Facundo\\.nuget\\packages\\",
-        "outputPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\obj\\",
+        "outputPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Facundo\\AppData\\Roaming\\NuGet\\NuGet.Config"

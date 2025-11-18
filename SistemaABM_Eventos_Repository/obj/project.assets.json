@@ -2689,11 +2689,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
+      "projectUniqueName": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
       "projectName": "SistemaABM_Eventos_Repository",
-      "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
+      "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\SistemaABM_Eventos_Repository.csproj",
       "packagesPath": "C:\\Users\\Facundo\\.nuget\\packages\\",
-      "outputPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\obj\\",
+      "outputPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Facundo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2708,11 +2708,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
-              "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj"
+            "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj": {
+              "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_Data\\SistemaABM_Eventos_Data.csproj"
             },
-            "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
-              "projectPath": "C:\\ort\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj"
+            "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj": {
+              "projectPath": "C:\\ort\\PNT-BackUp\\PNT-PROYECTO\\SistemaABM_Eventos_TransferObject\\SistemaABM_Eventos_TransferObject.csproj"
             }
           }
         }

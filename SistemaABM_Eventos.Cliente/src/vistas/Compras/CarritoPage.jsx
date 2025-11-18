@@ -32,7 +32,6 @@ export default function CarritoPage() {
     return acc + lote.precio * item.cantidad;
   }, 0);
 
-
   const finalizarCompra = async () => {
     if (carrito.length === 0) {
       alert("Tu carrito está vacío.");
@@ -45,14 +44,30 @@ export default function CarritoPage() {
       return;
     }
 
-    // EMAIL para el backend
+    // Validar stock antes de enviar
+    for (const item of carrito) {
+      const lista = lotes[item.evento.id] || [];
+      const lote = lista.find((l) => l.id === Number(item.loteId));
+      if (!lote) {
+        alert("Hubo un problema al validar los lotes.");
+        return;
+      }
+
+      const disponible = lote.cupo - lote.vendidas;
+
+      if (item.cantidad > disponible) {
+        alert(
+          `No hay suficientes entradas disponibles para "${item.evento.nombre}".`
+        );
+        return;
+      }
+    }
+
     const emailCompra =
-      (user && user.email)        // Si está logueado → usa su email
-        ? user.email
-        : "invitado@eventos.com"; // Invitado (evita error 400)
+      user && user.email ? user.email : "invitado@eventos.com";
 
     const payload = {
-      usuarioId: user?.id || null, // Si tu modelo tiene id de usuario
+      usuarioId: user?.id || null,
       email: emailCompra,
       direccionEnvio: "",
       metodoPago: "Simulado",
@@ -62,8 +77,6 @@ export default function CarritoPage() {
         cantidad: item.cantidad,
       })),
     };
-
-    console.log("Enviando compra:", payload);
 
     try {
       const res = await fetch("http://localhost:5281/api/compras", {
@@ -75,16 +88,16 @@ export default function CarritoPage() {
       if (!res.ok) {
         const txt = await res.text();
         console.error("Error en compra:", txt);
-        alert("❌ No se pudo procesar la compra.");
+        alert("No se pudo procesar la compra.");
         return;
       }
 
-      alert("✅ Compra realizada con éxito.");
-      vaciar();              // Limpia carrito
-      navigate("/");         // Volver a eventos
+      alert("Compra realizada con éxito.");
+      vaciar();
+      navigate("/");
     } catch (err) {
       console.error(err);
-      alert("❌ Error inesperado al procesar la compra.");
+      alert("Error inesperado al procesar la compra.");
     }
   };
 
@@ -123,7 +136,6 @@ export default function CarritoPage() {
               ))}
             </select>
 
-            {}
             <label>Cantidad</label>
             <div className="carrito-cantidad">
               <button
@@ -139,11 +151,30 @@ export default function CarritoPage() {
               <span>{item.cantidad}</span>
 
               <button
-                onClick={() =>
+                onClick={() => {
+                  const lista = lotes[item.evento.id] || [];
+                  const lote = lista.find(
+                    (l) => l.id === Number(item.loteId)
+                  );
+
+                  if (!lote) {
+                    alert("Seleccioná un lote antes de aumentar la cantidad.");
+                    return;
+                  }
+
+                  const disponible = lote.cupo - lote.vendidas;
+
+                  if (item.cantidad + 1 > disponible) {
+                    alert(
+                      "Ya no hay más entradas disponibles para comprar esa cantidad."
+                    );
+                    return;
+                  }
+
                   actualizar(item.evento.id, {
                     cantidad: item.cantidad + 1,
-                  })
-                }
+                  });
+                }}
               >
                 +
               </button>
