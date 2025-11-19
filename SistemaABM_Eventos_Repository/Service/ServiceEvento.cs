@@ -1,8 +1,8 @@
-using SistemaABM_Eventos_Repository.Interface;         // <- ESTE
-using SistemaABM_Eventos_TransferObject.ModelsDTO;     // DTOs
-using SistemaABM_Eventos_Data;                          // DbContext
-using SistemaABM_Eventos_Data.Models;                   // Entidades (si las usás directo)
-using Microsoft.EntityFrameworkCore;                    // EF Core
+using SistemaABM_Eventos_Repository.Interface;
+using SistemaABM_Eventos_TransferObject.ModelsDTO;
+using SistemaABM_Eventos_Data;
+using SistemaABM_Eventos_Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaABM_Eventos_Repository.Service;
 
@@ -67,28 +67,43 @@ public class ServiceEvento : IServiceEvento
                  ))
                  .FirstOrDefaultAsync();
 
-   public async Task<int> Crear(EventoCreateDTO dto)
+public async Task<int> Crear(EventoCreateDTO dto)
 {
-    var fechaLocal = DateTime.SpecifyKind(dto.FechaHora, DateTimeKind.Local);
+    var fecha = dto.FechaHora;
 
     Console.WriteLine("FECHA RECIBIDA: " + dto.FechaHora.ToString("O"));
-    Console.WriteLine("FECHA LOCAL:    " + fechaLocal.ToString("O"));
+    Console.WriteLine("FECHA GUARDADA: " + fecha.ToString("O"));
 
-    if (fechaLocal < DateTime.Now.AddMinutes(-1))
-        throw new InvalidOperationException("Fecha inválida.");
+    var fechaMinima = new DateTime(2025, 1, 1);
+    if (fecha < fechaMinima)
+        throw new InvalidOperationException("La fecha debe ser desde el año 2025 en adelante.");
 
     var e = new Evento
     {
         Nombre = dto.Nombre,
         Descripcion = dto.Descripcion,
-        FechaHora = fechaLocal,
+        FechaHora = fecha,
         VenueId = dto.VenueId,
         Categoria = dto.Categoria,
         ImagenPortadaUrl = dto.ImagenPortadaUrl
     };
 
     _db.Eventos.Add(e);
-    await _db.SaveChangesAsync();
+    await _db.SaveChangesAsync();   
+
+    
+    var loteInicial = new LoteEntrada
+    {
+        EventoId = e.Id,
+        Nombre = "Lote 1",
+        Precio = 25000,   
+        Cupo = 100,       
+        Vendidas = 0
+    };
+
+    _db.Lotes.Add(loteInicial);
+    await _db.SaveChangesAsync();   
+
     return e.Id;
 }
 

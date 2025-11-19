@@ -5,7 +5,7 @@ using SistemaABM_Eventos_Data.Models;                   // Entidades
 using Microsoft.EntityFrameworkCore;                    // EF Core
 using AutoMapper;                                       // AutoMapper
 
-namespace SistemaABM_Eventos_Repository.Service          // 👈 asegurate que sea "Service" (con 'r')
+namespace SistemaABM_Eventos_Repository.Service          
 {
     public class ServiceVenue : IServiceVenue
     {

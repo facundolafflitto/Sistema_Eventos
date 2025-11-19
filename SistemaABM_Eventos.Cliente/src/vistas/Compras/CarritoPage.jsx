@@ -33,6 +33,14 @@ export default function CarritoPage() {
   }, 0);
 
   const finalizarCompra = async () => {
+
+    // 🚫 Frenar si no está logueado
+    if (!user) {
+      alert("Tenés que iniciar sesión para realizar una compra.");
+      navigate("/login");
+      return;
+    }
+
     if (carrito.length === 0) {
       alert("Tu carrito está vacío.");
       return;
@@ -63,12 +71,10 @@ export default function CarritoPage() {
       }
     }
 
-    const emailCompra =
-      user && user.email ? user.email : "invitado@eventos.com";
-
+    // Como ahora siempre hay user, usamos su email e id directamente
     const payload = {
-      usuarioId: user?.id || null,
-      email: emailCompra,
+      usuarioId: user.id,
+      email: user.email,
       direccionEnvio: "",
       metodoPago: "Simulado",
       items: carrito.map((item) => ({
@@ -119,7 +125,6 @@ export default function CarritoPage() {
           <div className="carrito-info">
             <h2>{item.evento.nombre}</h2>
 
-            {/* Lote */}
             <label>Lote</label>
             <select
               className="carrito-select"

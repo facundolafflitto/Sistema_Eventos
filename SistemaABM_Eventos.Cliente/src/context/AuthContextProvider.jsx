@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
     return {
       id,
       email,
-      rol: role,   // ← ESTE ES EL QUE ROMPÍA TODO
+      rol: role,  
     };
   }
 
