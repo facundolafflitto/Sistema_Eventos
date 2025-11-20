@@ -70,10 +70,6 @@ public class ServiceEvento : IServiceEvento
 public async Task<int> Crear(EventoCreateDTO dto)
 {
     var fecha = dto.FechaHora;
-
-    Console.WriteLine("FECHA RECIBIDA: " + dto.FechaHora.ToString("O"));
-    Console.WriteLine("FECHA GUARDADA: " + fecha.ToString("O"));
-
     var fechaMinima = new DateTime(2025, 1, 1);
     if (fecha < fechaMinima)
         throw new InvalidOperationException("La fecha debe ser desde el año 2025 en adelante.");
@@ -89,23 +85,31 @@ public async Task<int> Crear(EventoCreateDTO dto)
     };
 
     _db.Eventos.Add(e);
-    await _db.SaveChangesAsync();   
+    await _db.SaveChangesAsync();
 
-    
-    var loteInicial = new LoteEntrada
+    var lotes = new List<LoteEntrada>
     {
-        EventoId = e.Id,
-        Nombre = "Lote 1",
-        Precio = 25000,   
-        Cupo = 100,       
-        Vendidas = 0
+        new LoteEntrada { EventoId = e.Id, Nombre = "Early Bird", Precio = 3000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Early Bird", Precio = 3500, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Anticipado", Precio = 4000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "General", Precio = 5000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote General", Precio = 5000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote General 2", Precio = 5200, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Última Hora", Precio = 6000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote VIP", Precio = 8000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "VIP", Precio = 9000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Fan Pack", Precio = 9500, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Premium", Precio = 12000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Ultra", Precio = 15000, Cupo = 100, Vendidas = 0 },
+        new LoteEntrada { EventoId = e.Id, Nombre = "Lote Backstage Experience", Precio = 20000, Cupo = 100, Vendidas = 0 }
     };
 
-    _db.Lotes.Add(loteInicial);
-    await _db.SaveChangesAsync();   
+    _db.Lotes.AddRange(lotes);
+    await _db.SaveChangesAsync();
 
     return e.Id;
 }
+
 
 
     public async Task<bool> Editar(int id, EventoCreateDTO dto)
